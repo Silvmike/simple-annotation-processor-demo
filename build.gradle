@@ -1,0 +1,29 @@
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+subprojects {
+
+	apply plugin: 'java-library'
+
+	ext {
+		junitVersion = "5.8.1"
+	}
+
+	repositories {
+		mavenCentral()
+	}
+
+	java {
+		sourceCompatibility = '11'
+	}
+
+	dependencies {
+		testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+		testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+	}
+
+	test {
+		useJUnitPlatform()
+	}
+
+}
