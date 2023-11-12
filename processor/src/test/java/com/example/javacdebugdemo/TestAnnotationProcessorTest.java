@@ -46,14 +46,16 @@ public class TestAnnotationProcessorTest {
             compilerTask.call();
         }
 
-        Assertions.assertTrue(Files.exists(tempSourceDir.resolve("TestImpl.java")));
-        Assertions.assertTrue(Files.exists(tempOutputDir.resolve("TestImpl.class")));
+        Assertions.assertTrue(Files.exists(tempSourceDir.resolve("com/TestImpl.java")));
+        Assertions.assertTrue(Files.exists(tempOutputDir.resolve("com/TestImpl.class")));
     }
 
     private static Path copyResource() throws IOException {
         Path tempDir = Files.createTempDirectory("test-src-");
-        Path copy = tempDir.resolve("Test.java");
-        try (InputStream input = TestAnnotationProcessor.class.getResourceAsStream("/test/src/Test.java")) {
+        Path subDir = tempDir.resolve("com");
+        Files.createDirectory(subDir);
+        Path copy = subDir.resolve("Test.java");
+        try (InputStream input = TestAnnotationProcessor.class.getResourceAsStream("/test/src/com/Test.java")) {
             Files.copy(input, copy);
         }
         return copy;
